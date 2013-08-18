@@ -1,12 +1,18 @@
 #!/usr/bin/python
 import numpy as np
 import time
+from datetime import date
 import calendar
 
 # Definitions of the expect year and date to calculate sleep hours average
 filePath = '/home/bruno/Dropbox/Projetos/PEP/Horas_sono/'
-calcYear = 2013
-calcMonth = int(raw_input('\nNumero mes de ' + str(calcYear) + ' a avaliar a media: '))
+
+calcYear = date.today().year
+calcMonth = raw_input('\nNumero mes de ' + str(calcYear) + ' a avaliar a media ou pressione ENTER para o mes atual: ')
+try:
+    calcMonth = int(calcMonth)
+except Exception, e:
+    calcMonth = date.today().month
 holidayStringIdentifier = 'F'
 
 # Used Variables
@@ -18,7 +24,7 @@ dateMonth = None
 holiday = False
 
 # Import sleep data
-print ('')
+print ('\nMes: ' + str(calcMonth) + '/' + str(calcYear))
 inputFile = open(filePath + 'track.txt', 'r')  # Open File
 while True:
     line = inputFile.readline()     # Read content
